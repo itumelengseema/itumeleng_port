@@ -1,54 +1,60 @@
-"use client";
-import React from "react";
-import { CodeBracketIcon, EyeIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import Image from "next/image";
+import React, { FC } from "react";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { Projects as ProjectType } from "@/typing";
+import Image from 'next/image';
+import { urlFor } from "@/sanity";
 
-/**
- * Props for the ProjectCard component.
- * @typedef {Object} ProjectCardProps
- * @property {string} imgUrl - The URL of the project's image.
- * @property {string} title - The title of the project.
- * @property {string} description - A brief description of the project.
- * @property {string} gitUrl - The URL to the project's GitHub repository.
- * @property {string} previewUrl - The URL to the live preview of the project.
- */
-interface ProjectCardProps {
-    imgUrl: string;
-    title: string;
-    description: string;
-    gitUrl: string;
-    previewUrl: string;
-}
+type Props = {
+    project: ProjectType;
+};
 
-/**
- * A card component that displays a project with an image, title, description, and links to the project's GitHub repository and live preview.
- * @param {ProjectCardProps} props - The props for the ProjectCard component.
- * @returns {JSX.Element} The rendered ProjectCard component.
- */
-const ProjectCard = ({ imgUrl, title, description, gitUrl, previewUrl }: ProjectCardProps) => {
+const ProjectCard: FC<Props> = ({ project }) => {
+    const { image, title, description, previewUrl, gitUrl, techStack } = project;
+
+    const imageUrl = image ? urlFor(image).url() : '';
+
     return (
-        <div>
-            <div className="h-52 md:h-72 rounded-t-xl relative group">
-                {/* Image of the project */}
+        <div className="flex flex-col items-center bg-[#121212] p-4 md:p-5 rounded-lg shadow-lg transform transition duration-500 hover:scale-105 mx-2 md:mx-4" style={{ width: "260px", minWidth: "260px" }}>
+            <div className="relative w-full h-40 md:h-48">
                 <Image
-                    width={400}
-                    height={200}
-                    src={imgUrl} alt={title} className="w-full h-full object-cover rounded-t-xl" />
-                {/* Overlay with links to GitHub and live preview */}
-                <div className="overlay items-center justify-center absolute top-0 left-0 w-full h-full bg-[#181818] bg-opacity-0 hidden group-hover:flex group-hover:bg-opacity-80 transition-all duration-500 ">
-                    <Link href={gitUrl} className="h-14 w-14 mr-2 border-2 relative rounded-full border-[#ADB7BE] hover:border-white group/link">
-                        <CodeBracketIcon className="h-10 w-10 text-[#ADB7BE] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group-hover/link:text-white" />
-                    </Link>
-                    <Link href={previewUrl} className="h-14 w-14 border-2 relative rounded-full border-[#ADB7BE] hover:border-white group/link">
-                        <EyeIcon className="h-10 w-10 text-[#ADB7BE] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group-hover/link:text-white" />
-                    </Link>
-                </div>
+                    src={imageUrl}
+                    alt={title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-t-lg"
+                />
             </div>
-            {/* Project title and description */}
-            <div className="text-white rounded-b-xl mt-3 bg-[#181818] py-6 px-4">
-                <h5 className="text-xl font-semibold mb-2">{title}</h5>
-                <p className="text-[#ADB7BE]">{description}</p>
+            <div className="flex flex-col justify-between mt-3 md:mt-4 flex-1">
+                <div>
+                    <h3 className="text-lg md:text-2xl font-bold text-white">{title}</h3>
+                    <p className="text-gray-400 mt-2 mb-4 h-16 md:h-24 overflow-hidden text-ellipsis hidden md:block">
+                        {description}
+                    </p>
+                    {techStack && techStack.length > 0 && (
+                        <div className="mt-2 md:mt-4">
+                            <h4 className="text-base md:text-lg font-semibold text-white">Tech Stack</h4>
+                            <ul className="flex flex-wrap mt-2">
+                                {techStack.map((tech, index) => (
+                                    <li key={index} className="bg-gray-800 text-white text-xs md:text-sm py-1 px-2 md:py-1 md:px-3 mr-2 mb-2 rounded-full">
+                                        {tech}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+                <div className="mt-3 md:mt-4 flex space-x-3">
+                    {gitUrl && (
+                        <a href={gitUrl} target="_blank" rel="noopener noreferrer">
+                            <FaGithub className="text-gray-400 hover:text-white" size={24} />
+                        </a>
+                    )}
+                    {previewUrl && (
+                        <a href={previewUrl} target="_blank" rel="noopener noreferrer">
+                            <FaExternalLinkAlt className="text-gray-400 hover:text-white" size={24} />
+                        </a>
+                    )}
+                </div>
             </div>
         </div>
     );

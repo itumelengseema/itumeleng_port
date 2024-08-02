@@ -14,9 +14,9 @@ interface NavLinkProps {
 }
 
 const navLinks: NavLinkProps[] = [
-  { title: "About", path: "#about" },
+
   { title: "Projects", path: "#projects" },
-  { title: "Skills", path: "#skills" },
+
   { title: "Contact", path: "#contact" },
 ];
 
@@ -25,10 +25,10 @@ const Navbar: React.FC = () => {
 
   return (
       <nav className="fixed top-0 left-0 right-0  bg-opacity-70 backdrop-blur-md bg-[#121212]   z-20">
-        <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-1">
+        <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-5 ">
           <Link href="/" className="text-1xl md:text-4xl text-white font-semibold">
             <Image
-                width={190}
+                width={170}
                 height={200}
                 src={Logo}
                 alt="logo"
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
               ))}
               <li className="flex items-center space-x-4">
                 <SocialIcon
-                    url="https://www.linkedin.com/in/itumeleng-seema-7b1b3b1b1/"
+                    url="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
                     bgColor="transparent"
                     fgColor="#fff"
                     style={{ height: 50, width: 50 }}
