@@ -2,7 +2,6 @@ interface SanityBody {
   _createdAt: string;
   _id: string;
   _rev: string;
-
   _updatedAt: string;
 }
 
@@ -40,20 +39,11 @@ export interface Projects extends SanityBody {
   description: string;
   image: Image;
   gitUrl?: string;
-  techStack?: string[];
-
+  techStack?: string[]; // Adjust if techStack is not always present
 }
 
-interface Image {
-  _type: "image";
-  asset: {
-    _ref: string;
-    _type: "reference";
-  };
-}
-
-export interface Experience {
-    _id: string;
+export interface Experience extends SanityBody {
+  _type: "experience"; // Ensure _type is correct
   company: string;
   role: string;
   companyLogo: Image;

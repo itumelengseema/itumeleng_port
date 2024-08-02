@@ -14,7 +14,7 @@ const ProjectCard: FC<Props> = ({ project }) => {
     const imageUrl = image ? urlFor(image).url() : '';
 
     return (
-        <div className="flex flex-col items-center bg-[#121212] p-4 md:p-5 rounded-lg shadow-lg transform transition duration-500 hover:scale-105 mx-2 md:mx-4" style={{ width: "260px", minWidth: "260px" }}>
+        <div className="flex flex-col bg-[#121212] p-4 md:p-5 rounded-lg shadow-lg transform transition duration-500 hover:scale-105 mx-2 md:mx-4" style={{ width: "100%", maxWidth: "360px" }}>
             <div className="relative w-full h-40 md:h-48">
                 <Image
                     src={imageUrl}
@@ -26,8 +26,8 @@ const ProjectCard: FC<Props> = ({ project }) => {
             </div>
             <div className="flex flex-col justify-between mt-3 md:mt-4 flex-1">
                 <div>
-                    <h3 className="text-lg md:text-2xl font-bold text-white">{title}</h3>
-                    <p className="text-gray-400 mt-2 mb-4 h-16 md:h-24 overflow-hidden text-ellipsis hidden md:block">
+                    <h3 className="text-lg md:text-xl font-bold text-white">{title}</h3>
+                    <p className="text-gray-400 mt-2 mb-4 h-16 md:h-20 overflow-hidden text-ellipsis">
                         {description}
                     </p>
                     {techStack && techStack.length > 0 && (
