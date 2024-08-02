@@ -44,7 +44,7 @@ const Email: React.FC = () => {
 
             {/* Contact Info */}
             <div className="z-10 space-y-6 text-center lg:text-left">
-                <h5 className="text-xl lg:text-2xl font-bold text-white">Let's Connect</h5>
+                <h5 className="text-xl lg:text-2xl font-bold text-white">Let&apos;s Connect</h5>
                 <p className="text-[#ADB7BE] max-w-md mx-auto lg:mx-0">
                     I&apos;m currently looking for new opportunities. My inbox is always open.
                     Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
